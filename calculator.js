@@ -54,7 +54,7 @@ divideBtn.addEventListener('click', () => {
 
 //Add event listener for multiply button
 multiplyBtn.addEventListener('click', () => {
-    display.textContent += multiplyBtn.textContent;
+    display.textContent += '*';
 })
 
 //Add event listener for percent button
@@ -82,8 +82,11 @@ equalBtn.addEventListener('click', () => {
     } else {
         result.textContent = Number(currentValue);
     }
+    //reset display to result
+    resetDisplayToResult();
+    //set display length
+    setDisplayLength();
 })
-
 
 
 // Reset the calculator
@@ -96,4 +99,16 @@ function resetCalculator() {
 function resetDisplay() {
     display.textContent = '';
     result.textContent = ''
+}
+
+//Function to reset display to result value
+function resetDisplayToResult() {
+    display.textContent = result.textContent;
+}
+
+//Function to set displayed value length to 10
+function setDisplayLength() {
+    if (display.textContent.length >= 10) {
+        display.textContent = display.textContent.slice(0, 10);
+    }
 }
