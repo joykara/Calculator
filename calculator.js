@@ -1,13 +1,14 @@
 //get values from index.html
 const display = document.querySelector('.display__input');
 const result = document.querySelector('.display__result');
-const clearBtn = document.getElementsByClassName('btn_clear');
-const deleteBtn = document.getElementsByClassName('btn_delete');
-const divideBtn = document.getElementsByClassName('btn_divide');
-const subtractBtn = document.getElementsByClassName('btn_minus');
-const addBtn = document.getElementsByClassName('btn_plus');
-const equalBtn = document.getElementsByClassName('btn_equal');
-const percentBtn = document.getElementsByClassName('btn_percent');
+const clearBtn = document.querySelector('.btn_clear');
+const deleteBtn = document.querySelector('.btn_delete');
+const divideBtn = document.querySelector('.btn_divide');
+const multiplyBtn = document.querySelector('.btn_multiply');
+const subtractBtn = document.querySelector('.btn_minus');
+const addBtn = document.querySelector('.btn_plus');
+const equalBtn = document.querySelector('.btn_equal');
+const percentBtn = document.querySelector('.btn_percent');
 const numberBtns = document.querySelectorAll('.btn_number');
 
 
@@ -26,27 +27,65 @@ numberBtns.forEach(btn => {
 // Add event listener to clear button
 clearBtn.addEventListener('click', () => {
     resetCalculator();
-    updateDisplay();
 })
 
 // Add event listener to delete button
 deleteBtn.addEventListener('click', () => {
-    display.textContent = display.textContent.slice(0, -1);
+    const currentValue = display.textContent;
+    if (currentValue.length === 0) {
+        result.textContent = '';
+    } else {
+    display.textContent = currentValue.slice(0, -1);
+    }
 });
+
+//Add event listener for add button
+addBtn.addEventListener('click', () => {
+    display.textContent += addBtn.textContent;
+})
+
+//Add event listener for subtract button
+subtractBtn.addEventListener('click', () => {
+    display.textContent += subtractBtn.textContent;
+})
+
+//Add event listener for divide button
+divideBtn.addEventListener('click', () => {
+    display.textContent += divideBtn.textContent;
+})
+
+//Add event listener for multiply button
+multiplyBtn.addEventListener('click', () => {
+    display.textContent += multiplyBtn.textContent;
+})
+
+
+
+//Add event listener for equal button
+equalBtn.addEventListener('click', () => {
+    //get current value
+    const currentValue = display.textContent;
+    if (display.textContent === '0') {
+        resetDisplay();
+    }
+    //evaluate calculation
+    if (currentValue.includes('+') || currentValue.includes('-') || currentValue.includes('*') || currentValue.includes('/')) {
+        result.textContent = eval(currentValue);
+    } else {
+        result.textContent = Number(currentValue);
+    }
+})
+
+
 
 // Reset the calculator
 function resetCalculator() {
-    shouldResetDisplay = false;
+    display.textContent = '0';
+    result.textContent = '';
 }
 
 //Function to update display
 function resetDisplay() {
     display.textContent = '';
     result.textContent = '0'
-}
-
-//Function to update display
-function updateDisplay() {
-    display.textContent = '0';
-    result.textContent = '';
 }
