@@ -65,6 +65,8 @@ percentBtn.addEventListener('click', () => {
         currentValue = currentValue.toFixed(5);
         display.textContent = currentValue;
     }
+    //set display length
+    setDisplayLength();
 });
 
 
