@@ -12,8 +12,6 @@ const percentBtn = document.querySelector('.btn_percent');
 const numberBtns = document.querySelectorAll('.btn_number');
 
 
-let shouldResetDisplay = false;
-
 // Add event listeners to number buttons
 numberBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -59,15 +57,25 @@ multiplyBtn.addEventListener('click', () => {
     display.textContent += multiplyBtn.textContent;
 })
 
+//Add event listener for percent button
+percentBtn.addEventListener('click', () => {
+    const currentValue = parseFloat(display.textContent);
+    display.textContent = (currentValue / 100).toString();
+    if (currentValue.length >= 8) {
+        currentValue = currentValue.toFixed(5);
+        display.textContent = currentValue;
+    }
+});
 
 
 //Add event listener for equal button
 equalBtn.addEventListener('click', () => {
     //get current value
-    const currentValue = display.textContent;
-    if (display.textContent === '0') {
-        resetDisplay();
-    }
+      /*const currentValue = display.textContent;
+        if (display.textContent === '0') {
+            resetDisplay();
+        } */
+    currentValue = (display.textContent === '0') ? resetDisplay() : display.textContent;
     //evaluate calculation
     if (currentValue.includes('+') || currentValue.includes('-') || currentValue.includes('*') || currentValue.includes('/')) {
         result.textContent = eval(currentValue);
@@ -87,5 +95,5 @@ function resetCalculator() {
 //Function to update display
 function resetDisplay() {
     display.textContent = '';
-    result.textContent = '0'
+    result.textContent = ''
 }
