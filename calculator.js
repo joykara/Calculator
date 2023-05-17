@@ -54,7 +54,7 @@ divideBtn.addEventListener('click', () => {
 
 //Add event listener for multiply button
 multiplyBtn.addEventListener('click', () => {
-    display.textContent += '*';
+    display.textContent += multiplyBtn.textContent;
 })
 
 //Add event listener for percent button
@@ -73,15 +73,22 @@ percentBtn.addEventListener('click', () => {
 //Add event listener for equal button
 equalBtn.addEventListener('click', () => {
     //get current value
-      /*const currentValue = display.textContent;
-        if (display.textContent === '0') {
-            resetDisplay();
-        } */
+    let currentValue = display.textContent;
+        // if (display.textContent === '0') {
+        //     resetDisplay();
+        // } */
     currentValue = (display.textContent === '0') ? resetDisplay() : display.textContent;
+
     //evaluate calculation
-    if (currentValue.includes('+') || currentValue.includes('-') || currentValue.includes('*') || currentValue.includes('/')) {
+    if (currentValue.includes('+') || currentValue.includes('-') || currentValue.includes('/')) {
         result.textContent = eval(currentValue);
-    } else {
+    }
+    else if (currentValue.includes(multiplyBtn.textContent)) {
+        console.log(currentValue);
+        let newValue = currentValue.replace(multiplyBtn.textContent, '*')
+        result.textContent = eval(newValue);
+    }
+    else {
         result.textContent = Number(currentValue);
     }
     //reset display to result
