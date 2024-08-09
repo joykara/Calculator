@@ -11,7 +11,6 @@ const equalBtn = document.querySelector('.btn_equal');
 const percentBtn = document.querySelector('.btn_percent');
 const numberBtns = document.querySelectorAll('.btn_number');
 
-
 // Add event listeners to number buttons
 numberBtns.forEach(btn => {
     btn.addEventListener('click', () => {
